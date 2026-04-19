@@ -42,9 +42,9 @@ FROM hr_data;
 ```
 
 ## 📈 Interactive HR Dashboard
-![HR Dashboard](../04_Screenshots/hr_analytics_dashboard_final.png)
+![HR Dashboard](./04_Screenshots/hr_analytics_dashboard_final.png)
 ## 📊 SQL Analytics Preview
-![SQL Age Analysis](../04_Screenshots/sql_age_group_analysis.png)
+![SQL Age Analysis](./04_Screenshots/sql_age_group_analysis.png)
 ## 🚀 Key Insights
 - **Age Factor:** Employees under 30 show a significantly higher attrition rate (as seen in the Age Group segmentation).
 - **Departmental Trends:** Sales and R&D departments require targeted retention strategies.
