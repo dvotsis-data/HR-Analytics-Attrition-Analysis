@@ -184,7 +184,7 @@ ORDER BY Attrition_Rate DESC;
 
 
 -- ===========================================================
--- 9. DATA VIEW FOR POWER BI
+-- 9. REUSABLE SQL VIEW FOR HR ANALYSIS
 -- ===========================================================
 
 CREATE OR REPLACE VIEW View_HR_Analysis AS
