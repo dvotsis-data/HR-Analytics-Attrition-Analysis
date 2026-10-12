@@ -2,18 +2,18 @@
 
 ## Project Overview
 
-This project analyzes employee attrition across a dataset of 1,470 employees using SQL and Power BI.
+This project analyzes employee attrition using a dataset of 1,470 employees.
 
-The goal was to understand how employee turnover varies across departments, job roles, overtime status, and years at the company. I used MySQL for exploratory analysis and Power BI to build an interactive dashboard that presents the main workforce metrics and explores attrition patterns in more detail.
+I used MySQL to explore the data and calculate attrition metrics, and Power BI to build a three-page report. The analysis focuses on employee turnover across departments, overtime status, years at the company, job satisfaction, environment satisfaction, and work-life balance.
 
-The project focuses on identifying areas that HR teams could investigate to improve employee retention.
+The main goal was to identify patterns in employee attrition and understand which groups might need further attention from HR teams.
 
 ## Tools Used
 
-- **MySQL:** Data exploration, aggregation, CASE statements, and SQL views
+- **MySQL:** Data exploration, validation, aggregation, CASE statements, and SQL views
 - **Power BI:** Dashboard development, DAX measures, and data visualization
-- **Power Query:** Data preparation, data types, and employee grouping
-- **CSV:** Source data for the Power BI report
+- **Power Query:** Data preparation and employee grouping
+- **CSV:** Source dataset
 
 ## Key Metrics
 
@@ -25,102 +25,136 @@ The project focuses on identifying areas that HR teams could investigate to impr
 | Average Monthly Income | 6.50K |
 | Average Job Satisfaction | 2.73 |
 
-## Power BI Dashboard
+## Power BI Report
 
-I created a two-page Power BI report to explore workforce characteristics and employee attrition.
+I created three report pages to explore different aspects of the HR dataset.
 
 ### Workforce Overview
 
-The first page provides an overview of the workforce, including employee headcount, attrition rate, average income, and job satisfaction.
+The first page presents the main workforce metrics, including total employees, employee departures, attrition rate, average income, and job satisfaction.
 
-It also shows employee departures by age group, job role, and department, along with average income by job role.
-
-![Workforce Overview](./04_Screenshots/workforce_overview.png)
+It also shows employee distribution across departments, departures by age group and job role, and average income by job role.
 
 ### Employee Attrition Deep Dive
 
 The second page focuses on attrition rates across different employee groups.
 
-I compared employees who work overtime with those who do not, analyzed attrition by years at the company, and examined differences between departments.
+I compared attrition by overtime status, years at the company, and department. I also combined overtime and tenure to see whether certain groups had noticeably different attrition rates.
 
-I also combined overtime and tenure to see how attrition varies when both factors are considered.
+### Job Satisfaction Analysis
 
-![Employee Attrition Deep Dive](./04_Screenshots/attrition_deep_dive.png)
+The third page examines employee satisfaction and its relationship with attrition.
+
+It includes attrition rates by job satisfaction, environment satisfaction, and work-life balance, along with average job satisfaction by department.
 
 ## Key Findings
 
 ### Overtime and Attrition
 
-Employees working overtime had an attrition rate of **30.53%**, compared with **10.44%** for employees who did not work overtime.
+| Overtime | Employees | Employees Who Left | Attrition Rate |
+|---|---:|---:|---:|
+| Yes | 416 | 127 | 30.53% |
+| No | 1,054 | 110 | 10.44% |
 
-This was one of the clearest differences in the dataset. It suggests that overtime and workload are worth investigating further when reviewing employee retention.
+Employees working overtime had an attrition rate of 30.53%, compared with 10.44% for employees who did not work overtime.
+
+This was one of the largest differences I found in the dataset and made overtime an important area to investigate further.
 
 ### Attrition by Years at the Company
 
-| Years at Company | Attrition Rate |
-|---|---|
-| 0–1 years | 34.88% |
-| 2–4 years | 18.08% |
-| 5–9 years | 11.07% |
-| 10+ years | 10.38% |
+| Years at Company | Employees | Employees Who Left | Attrition Rate |
+|---|---:|---:|---:|
+| 0–1 years | 215 | 75 | 34.88% |
+| 2–4 years | 365 | 66 | 18.08% |
+| 5–9 years | 524 | 58 | 11.07% |
+| 10+ years | 366 | 38 | 10.38% |
 
-Employees with 0–1 years at the company had the highest attrition rate.
+Employees with 0–1 years at the company had the highest attrition rate at 34.88%.
 
-Attrition was lower among employees with longer tenure. This makes onboarding and support for new employees useful areas for further investigation.
+Attrition was lower among employees with longer tenure. This suggests that onboarding and support during the first years of employment are worth examining.
 
 ### Attrition by Department
 
-| Department | Attrition Rate |
-|---|---|
-| Sales | 20.63% |
-| Human Resources | 19.05% |
-| Research & Development | 13.84% |
+| Department | Employees | Employees Who Left | Attrition Rate |
+|---|---:|---:|---:|
+| Sales | 446 | 92 | 20.63% |
+| Human Resources | 63 | 12 | 19.05% |
+| Research & Development | 961 | 133 | 13.84% |
 
-Sales had the highest attrition rate, followed by Human Resources.
+Sales had the highest attrition rate at 20.63%, followed by Human Resources at 19.05%.
 
-These differences could help HR teams decide where to investigate employee experiences and working conditions more closely.
+Research & Development had the largest number of employees who left, but the lowest attrition rate among the three departments.
 
 ### Combining Overtime and Tenure
 
-| Years at Company | No Overtime | Overtime |
-|---|---|---|
-| 0–1 years | 25.34% | 55.07% |
-| 2+ years | 8.04% | 25.65% |
+| Years at Company | Overtime | Employees | Employees Who Left | Attrition Rate |
+|---|---|---:|---:|---:|
+| 0–1 years | Yes | 69 | 38 | 55.07% |
+| 0–1 years | No | 146 | 37 | 25.34% |
+| 2+ years | Yes | 347 | 89 | 25.65% |
+| 2+ years | No | 908 | 73 | 8.04% |
 
-The highest attrition rate, **55.07%**, was found among employees with 0–1 years at the company who also worked overtime.
+The highest attrition rate, 55.07%, was found among employees with 0–1 years at the company who also worked overtime.
 
-This was an important finding because it showed how looking at two factors together can reveal differences that are less visible in separate charts.
+Looking at tenure and overtime together helped me identify a group with a much higher attrition rate than the overall workforce.
 
-These results show associations within the dataset and do not establish that overtime or tenure directly causes employees to leave.
+### Job Satisfaction and Attrition
+
+| Job Satisfaction | Attrition Rate |
+|---|---:|
+| 1 | 22.84% |
+| 2 | 16.43% |
+| 3 | 16.52% |
+| 4 | 11.33% |
+
+Employees with the lowest job satisfaction score (1) had an attrition rate of 22.84%, compared with 11.33% among employees with the highest score (4).
+
+The difference suggests that job satisfaction is worth considering when analyzing employee turnover.
+
+### Environment Satisfaction and Attrition
+
+| Environment Satisfaction | Attrition Rate |
+|---|---:|
+| 1 | 25.35% |
+| 2 | 14.98% |
+| 3 | 13.69% |
+| 4 | 13.45% |
+
+Employees with the lowest environment satisfaction score had the highest attrition rate at 25.35%.
+
+The other three groups had lower and relatively similar attrition rates.
+
+### Work-Life Balance and Attrition
+
+| Work-Life Balance | Attrition Rate |
+|---|---:|
+| 1 | 31.25% |
+| 2 | 16.86% |
+| 3 | 14.22% |
+| 4 | 17.65% |
+
+Employees with the lowest work-life balance score had an attrition rate of 31.25%.
+
+The relationship was not completely linear, since employees with a score of 4 had a slightly higher attrition rate than those with a score of 3.
 
 ## SQL Analysis
 
-I used MySQL to explore the HR dataset and calculate workforce metrics.
+I used MySQL to explore the dataset and validate the main attrition calculations.
 
-The SQL analysis includes employee counts, attrition calculations, demographic grouping, and a view named `View_HR_Analysis`.
+The SQL script includes:
 
-The view uses CASE statements to group employees by age and convert the Attrition field into a numeric indicator.
+- Data quality checks and employee counts
+- Overall attrition rate
+- Attrition by department and age group
+- Attrition by job satisfaction
+- Attrition by employee tenure
+- Attrition by overtime status
+- Combined analysis of tenure and overtime
+- A reusable SQL view named `View_HR_Analysis`
 
-```sql
-CASE
-    WHEN Age < 30 THEN 'Under 30'
-    WHEN Age BETWEEN 30 AND 40 THEN '30-40'
-    ELSE '40+'
-END AS Age_Group,
+The SQL view groups employees into age categories and converts the Attrition field into a numeric indicator using CASE statements.
 
-CASE
-    WHEN Attrition = 'Yes' THEN 1
-    ELSE 0
-END AS Attrition_Flag
-```
-
-The Power BI report imports the full `hr_data.csv` dataset (1,470 employee records) directly. Data preparation and additional calculated columns are handled in Power Query. MySQL is used separately for exploratory analysis and SQL views.
-
-### SQL Screenshots
-
-![SQL Age Group Analysis](./04_Screenshots/sql_age_group_analysis.png)
-
-![SQL View Architecture](./04_Screenshots/sql_view_architecture.png)
+The Power BI report imports `hr_data.csv` directly and uses Power Query for additional transformations. The SQL analysis is a separate part of the project and does not serve as the data source for Power BI.
 
 ## Project Structure
 
@@ -140,6 +174,7 @@ HR-Analytics-Attrition-Analysis/
 |-- 04_Screenshots/
 |   |-- workforce_overview.png
 |   |-- attrition_deep_dive.png
+|   |-- job_satisfaction_analysis.png
 |   |-- sql_age_group_analysis.png
 |   |-- sql_view_architecture.png
 |
@@ -155,8 +190,10 @@ HR-Analytics-Attrition-Analysis/
 
 ## Conclusion
 
-The analysis showed that attrition was particularly high among employees working overtime and employees in their first years at the company.
+The analysis showed higher attrition rates among employees working overtime, employees with shorter tenure, and employees reporting low satisfaction scores.
 
-The combined analysis of overtime and tenure provided a more detailed view of these patterns and highlighted a group with a particularly high attrition rate.
+The combined analysis of overtime and tenure was particularly useful because it revealed differences that were less visible when examining these factors separately.
 
-Through this project, I practiced SQL analysis, data preparation, DAX calculations, and Power BI dashboard development, with a focus on presenting findings that are useful for business decisions.
+This project helped me practice SQL analysis, data validation, DAX calculations, Power Query transformations, and Power BI reporting.
+
+The findings describe patterns within the dataset rather than proven causes of employee turnover.
