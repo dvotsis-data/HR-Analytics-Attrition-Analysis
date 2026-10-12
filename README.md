@@ -114,7 +114,7 @@ CASE
 END AS Attrition_Flag
 ```
 
-The Power BI report uses the CSV dataset directly, with additional transformations performed in Power Query. The SQL analysis is a separate part of the project.
+The Power BI report imports the full `hr_data.csv` dataset (1,470 employee records) directly. Data preparation and additional calculated columns are handled in Power Query. MySQL is used separately for exploratory analysis and SQL views.
 
 ### SQL Screenshots
 
@@ -128,7 +128,6 @@ The Power BI report uses the CSV dataset directly, with additional transformatio
 HR-Analytics-Attrition-Analysis/
 |
 |-- 01_Data/
-|   |-- HR_Final_Data.csv
 |   |-- hr_data.csv
 |
 |-- 02_SQL/
@@ -141,7 +140,6 @@ HR-Analytics-Attrition-Analysis/
 |-- 04_Screenshots/
 |   |-- workforce_overview.png
 |   |-- attrition_deep_dive.png
-|   |-- hr_analytics_dashboard_final.png
 |   |-- sql_age_group_analysis.png
 |   |-- sql_view_architecture.png
 |
@@ -153,7 +151,7 @@ HR-Analytics-Attrition-Analysis/
 - [Power BI Dashboard (PDF)](./03_PowerBI/HR%20Analytics%20Dashboard.pdf)
 - [Power BI Report (.pbix)](./03_PowerBI/HR%20Analytics.pbix)
 - [SQL Queries](./02_SQL/analysis_queries.sql)
-- [HR Dataset](./01_Data/HR_Final_Data.csv)
+- [HR Dataset](./01_Data/hr_data.csv)
 
 ## Conclusion
 
