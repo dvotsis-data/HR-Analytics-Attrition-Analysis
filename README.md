@@ -85,7 +85,7 @@ These differences could help HR teams decide where to investigate employee exper
 | Years at Company | No Overtime | Overtime |
 |---|---|---|
 | 0–1 years | 25.34% | 55.07% |
-| 2+ years | 8.04% | 26.65% |
+| 2+ years | 8.04% | 25.65% |
 
 The highest attrition rate, **55.07%**, was found among employees with 0–1 years at the company who also worked overtime.
 
