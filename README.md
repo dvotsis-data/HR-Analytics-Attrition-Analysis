@@ -1,57 +1,164 @@
-# 📊 HR Analytics: Employee Attrition & Workforce Analysis
+# HR Analytics | Employee Attrition Analysis
 
-## 📌 Project Overview
-This project focuses on identifying the underlying catalyst drivers behind employee attrition. Utilizing **SQL (MySQL)** for data extraction, transformation, and structural modeling, and **Power BI** for corporate visual storytelling, the pipeline converts raw workforce metrics into targeted retention strategies.
+## Project Overview
 
-## 🎯 Objectives
-*   Extract and calculate core institutional HR metrics (Total Headcount, Absolute Attrition Count, and Attrition Rate).
-*   Segment workforce demographics into categorical brackets to isolate high-risk age clusters.
-*   Correlate employee job satisfaction trends against departmental turnover volumes.
-*   Build a production-ready SQL database view optimized to serve as a high-performance data source for dynamic Power BI dashboards.
+This project analyzes employee attrition across a dataset of 1,470 employees using SQL and Power BI.
 
-## 🛠 Tools & Technologies
-*   **Database Engine:** MySQL (Exploratory Data Analysis & View Architecture)
-*   **Business Intelligence:** Power BI Desktop (Data Modeling & KPI Mapping)
-*   **SQL Frameworks:** Conditional Case Logic (`CASE WHEN`), Aggregation Functions, Optimization Views
+The goal was to understand how employee turnover varies across departments, job roles, overtime status, and years at the company. I used MySQL for exploratory analysis and Power BI to build an interactive dashboard that presents the main workforce metrics and explores attrition patterns in more detail.
 
-## 📉 Database Architecture & BI Optimization
-A frequent mistake in data pipelines is importing raw, unoptimized tables straight into Power BI, which degrades refresh performance. This project addresses that by shifting the heavy transformation workload directly onto the database layer.
+The project focuses on identifying areas that HR teams could investigate to improve employee retention.
 
-### 1. Data Transformation via Centralized View
-I constructed a production-optimized SQL View (`View_HR_Analysis`). This view pre-aggregates demographic brackets and handles numerical conversions before the BI layer ingests the data:
+## Tools Used
+
+- **MySQL:** Data exploration, aggregation, CASE statements, and SQL views
+- **Power BI:** Dashboard development, DAX measures, and data visualization
+- **Power Query:** Data preparation, data types, and employee grouping
+- **CSV:** Source data for the Power BI report
+
+## Key Metrics
+
+| Metric | Value |
+|---|---|
+| Total Employees | 1,470 |
+| Employees Who Left | 237 |
+| Attrition Rate | 16.12% |
+| Average Monthly Income | 6.50K |
+| Average Job Satisfaction | 2.73 |
+
+## Power BI Dashboard
+
+I created a two-page Power BI report to explore workforce characteristics and employee attrition.
+
+### Workforce Overview
+
+The first page provides an overview of the workforce, including employee headcount, attrition rate, average income, and job satisfaction.
+
+It also shows employee departures by age group, job role, and department, along with average income by job role.
+
+![Workforce Overview](./04_Screenshots/workforce_overview.png)
+
+### Employee Attrition Deep Dive
+
+The second page focuses on attrition rates across different employee groups.
+
+I compared employees who work overtime with those who do not, analyzed attrition by years at the company, and examined differences between departments.
+
+I also combined overtime and tenure to see how attrition varies when both factors are considered.
+
+![Employee Attrition Deep Dive](./04_Screenshots/attrition_deep_dive.png)
+
+## Key Findings
+
+### Overtime and Attrition
+
+Employees working overtime had an attrition rate of **30.53%**, compared with **10.44%** for employees who did not work overtime.
+
+This was one of the clearest differences in the dataset. It suggests that overtime and workload are worth investigating further when reviewing employee retention.
+
+### Attrition by Years at the Company
+
+| Years at Company | Attrition Rate |
+|---|---|
+| 0–1 years | 34.88% |
+| 2–4 years | 18.08% |
+| 5–9 years | 11.07% |
+| 10+ years | 10.38% |
+
+Employees with 0–1 years at the company had the highest attrition rate.
+
+Attrition was lower among employees with longer tenure. This makes onboarding and support for new employees useful areas for further investigation.
+
+### Attrition by Department
+
+| Department | Attrition Rate |
+|---|---|
+| Sales | 20.63% |
+| Human Resources | 19.05% |
+| Research & Development | 13.84% |
+
+Sales had the highest attrition rate, followed by Human Resources.
+
+These differences could help HR teams decide where to investigate employee experiences and working conditions more closely.
+
+### Combining Overtime and Tenure
+
+| Years at Company | No Overtime | Overtime |
+|---|---|---|
+| 0–1 years | 25.34% | 55.07% |
+| 2+ years | 8.04% | 26.65% |
+
+The highest attrition rate, **55.07%**, was found among employees with 0–1 years at the company who also worked overtime.
+
+This was an important finding because it showed how looking at two factors together can reveal differences that are less visible in separate charts.
+
+These results show associations within the dataset and do not establish that overtime or tenure directly causes employees to leave.
+
+## SQL Analysis
+
+I used MySQL to explore the HR dataset and calculate workforce metrics.
+
+The SQL analysis includes employee counts, attrition calculations, demographic grouping, and a view named `View_HR_Analysis`.
+
+The view uses CASE statements to group employees by age and convert the Attrition field into a numeric indicator.
 
 ```sql
-CREATE OR REPLACE VIEW View_HR_Analysis AS
-SELECT 
-    EmployeeNumber, Age, Gender, Department, JobRole, MonthlyIncome,
-    JobSatisfaction, Attrition,
-    CASE 
-        WHEN Age < 30 THEN 'Under 30'
-        WHEN Age BETWEEN 30 AND 40 THEN '30-40'
-        ELSE '40+'
-    END AS Age_Group,
-    CASE WHEN Attrition = 'Yes' THEN 1 ELSE 0 END AS Attrition_Flag
-FROM hr_data;
+CASE
+    WHEN Age < 30 THEN 'Under 30'
+    WHEN Age BETWEEN 30 AND 40 THEN '30-40'
+    ELSE '40+'
+END AS Age_Group,
+
+CASE
+    WHEN Attrition = 'Yes' THEN 1
+    ELSE 0
+END AS Attrition_Flag
 ```
 
-### 2. Strategic Technical Decisions within SQL:
-*   **The `Attrition_Flag` Optimization:** Converting the raw text string (`'Yes'`, `'No'`) into a binary numeric data type (`1`, `0`) allows Power BI to compute explicit mathematical measures (like dynamic turnover percentages) directly via DAX without requiring custom column conversions during runtime.
-*   **Demographic Grouping:** Applied custom conditional grouping to segment continuous age metrics into discrete organizational brackets (`Under 30`, `30-40`, `40+`), ensuring cleaner chart cross-filtering.
+The Power BI report uses the CSV dataset directly, with additional transformations performed in Power Query. The SQL analysis is a separate part of the project.
 
-## 📷 Interactive HR Dashboard
-![HR Dashboard](./04_Screenshots/hr_analytics_dashboard_final.png)
+### SQL Screenshots
 
-## 📊 SQL Analytics Preview
-### Demographic Attrition Analysis via MySQL Console
-![SQL Age Analysis](./04_Screenshots/sql_age_group_analysis.png)
+![SQL Age Group Analysis](./04_Screenshots/sql_age_group_analysis.png)
 
-## 🚀 Actionable HR Insights (Business Value)
-*   **The Under-30 Flight Risk:** Demographic data proves that employees under 30 exhibit a significantly higher turnover trajectory. Recommendation: HR stakeholders should design structured mentorship frameworks and clear 12-month career roadmaps to improve early-stage retention.
-*   **Departmental Burnout Patterns:** Cross-referencing satisfaction metrics revealed that despite high departmental significance, Sales and R&D exhibit strong attrition clusters coupled with lower average job satisfaction scores.
-*   **Satisfaction as a Lead Indicator:** Drops in environmental and job satisfaction scores serve as measurable warning signs of imminent attrition, allowing HR teams to proactively intervene before formal resignations are submitted.
+![SQL View Architecture](./04_Screenshots/sql_view_architecture.png)
 
-## 📁 Project Structure
-*   **01_Data/**: Raw and processed HR corporate datasets.
-*   **02_SQL/**: Structured scripts for exploratory querying and optimized View generation.
-*   **03_PowerBI/**: Power BI desktop report files and performance documentation.
-*   **04_Screenshots/**: Validated SQL output matrices and dashboard visual layers.
+## Project Structure
+
+```text
+HR-Analytics-Attrition-Analysis/
+|
+|-- 01_Data/
+|   |-- HR_Final_Data.csv
+|   |-- hr_data.csv
+|
+|-- 02_SQL/
+|   |-- analysis_queries.sql
+|
+|-- 03_PowerBI/
+|   |-- HR Analytics Dashboard.pdf
+|   |-- HR Analytics.pbix
+|
+|-- 04_Screenshots/
+|   |-- workforce_overview.png
+|   |-- attrition_deep_dive.png
+|   |-- hr_analytics_dashboard_final.png
+|   |-- sql_age_group_analysis.png
+|   |-- sql_view_architecture.png
+|
+|-- README.md
+```
+
+## Project Files
+
+- [Power BI Dashboard (PDF)](./03_PowerBI/HR%20Analytics%20Dashboard.pdf)
+- [Power BI Report (.pbix)](./03_PowerBI/HR%20Analytics.pbix)
+- [SQL Queries](./02_SQL/analysis_queries.sql)
+- [HR Dataset](./01_Data/HR_Final_Data.csv)
+
+## Conclusion
+
+The analysis showed that attrition was particularly high among employees working overtime and employees in their first years at the company.
+
+The combined analysis of overtime and tenure provided a more detailed view of these patterns and highlighted a group with a particularly high attrition rate.
+
+Through this project, I practiced SQL analysis, data preparation, DAX calculations, and Power BI dashboard development, with a focus on presenting findings that are useful for business decisions.
