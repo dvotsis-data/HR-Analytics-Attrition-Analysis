@@ -35,17 +35,23 @@ The first page presents the main workforce metrics, including total employees, e
 
 It also shows employee distribution across departments, departures by age group and job role, and average income by job role.
 
-### Employee Attrition Deep Dive
+![Workforce Overview](./04_Screenshots/workforce_overview.png)
+
+### Attrition Deep Dive
 
 The second page focuses on attrition rates across different employee groups.
 
 I compared attrition by overtime status, years at the company, and department. I also combined overtime and tenure to see whether certain groups had noticeably different attrition rates.
+
+![Attrition Deep Dive](./04_Screenshots/attrition_deep_dive.png)
 
 ### Job Satisfaction Analysis
 
 The third page examines employee satisfaction and its relationship with attrition.
 
 It includes attrition rates by job satisfaction, environment satisfaction, and work-life balance, along with average job satisfaction by department.
+
+![Job Satisfaction Analysis](./04_Screenshots/job_satisfaction_analysis.png)
 
 ## Key Findings
 
@@ -154,7 +160,7 @@ The SQL script includes:
 
 The SQL view groups employees into age categories and converts the Attrition field into a numeric indicator using CASE statements.
 
-The Power BI report imports `hr_data.csv` directly and uses Power Query for additional transformations. The SQL analysis is a separate part of the project and does not serve as the data source for Power BI.
+The Power BI report imports the CSV dataset directly and uses Power Query for additional transformations. The SQL analysis is a separate part of the project and does not serve as the data source for Power BI.
 
 ## Project Structure
 
@@ -162,7 +168,7 @@ The Power BI report imports `hr_data.csv` directly and uses Power Query for addi
 HR-Analytics-Attrition-Analysis/
 |
 |-- 01_Data/
-|   |-- hr_data.csv
+|   |-- HR_Final_Data.csv
 |
 |-- 02_SQL/
 |   |-- analysis_queries.sql
@@ -175,8 +181,6 @@ HR-Analytics-Attrition-Analysis/
 |   |-- workforce_overview.png
 |   |-- attrition_deep_dive.png
 |   |-- job_satisfaction_analysis.png
-|   |-- sql_age_group_analysis.png
-|   |-- sql_view_architecture.png
 |
 |-- README.md
 ```
@@ -186,7 +190,7 @@ HR-Analytics-Attrition-Analysis/
 - [Power BI Dashboard (PDF)](./03_PowerBI/HR%20Analytics%20Dashboard.pdf)
 - [Power BI Report (.pbix)](./03_PowerBI/HR%20Analytics.pbix)
 - [SQL Queries](./02_SQL/analysis_queries.sql)
-- [HR Dataset](./01_Data/hr_data.csv)
+- [HR Dataset](./01_Data/HR_Final_Data.csv)
 
 ## Conclusion
 
