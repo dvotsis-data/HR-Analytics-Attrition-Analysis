@@ -168,7 +168,7 @@ The Power BI report imports the CSV dataset directly and uses Power Query for ad
 HR-Analytics-Attrition-Analysis/
 |
 |-- 01_Data/
-|   |-- HR_Final_Data.csv
+|   |-- hr_data.csv
 |
 |-- 02_SQL/
 |   |-- analysis_queries.sql
