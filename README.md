@@ -190,7 +190,7 @@ HR-Analytics-Attrition-Analysis/
 - [Power BI Dashboard (PDF)](./03_PowerBI/HR%20Analytics%20Dashboard.pdf)
 - [Power BI Report (.pbix)](./03_PowerBI/HR%20Analytics.pbix)
 - [SQL Queries](./02_SQL/analysis_queries.sql)
-- [HR Dataset](./01_Data/HR_Final_Data.csv)
+- [HR Dataset](./01_Data/hr_data.csv)
 
 ## Conclusion
 
